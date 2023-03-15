@@ -13,7 +13,7 @@ function App() {
     <div className="App">
         <h8k-navbar header={title}></h8k-navbar>
       <div className="layout-column justify-content-center align-items-center w-50 mx-auto">
-        <Search setError={setError} setResidentNameList={setResidentNameList} />
+        <Search setError={setError} setResidentNameList={setResidentNameList} residentNameList={residentNameList} />
         <Error error={error} />
         <ResidentsList residentNameList={residentNameList} />
       </div>

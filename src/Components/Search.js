@@ -12,7 +12,7 @@ function checkValidity(joiningDate, validityDate) {
 	return (maxValid >= selected) && (maxValid >= today);
 }
 
-function Search({setError, setResidentNameList}) {
+function Search({setError, setResidentNameList, residentNameList}) {
 	const [studentName, setStudentName] = useState('')
 	const [joiningDate, setJoiningDate] = useState('')
 	const handleAdd = () => {
@@ -24,7 +24,7 @@ function Search({setError, setResidentNameList}) {
 			setError(`Sorry, ${studentName}'s validity has Expired!`);
 			return;
 		}
-		setResidentNameList.push(studentName)
+		setResidentNameList([...residentNameList, studentName])
 	}
 	return (
 		<div className="my-50 layout-row align-items-end justify-content-end">

@@ -16,7 +16,7 @@ function Search({setError, setResidentNameList}) {
 	const [studentName, setStudentName] = useState('')
 	const [joiningDate, setJoiningDate] = useState('')
 	const handleAdd = () => {
-		if (!STUDENTS.filter(st => st.name === studentName).length) {
+		if (!STUDENTS.filter(st => st.name.toUpperCase() === studentName.toUpperCase()).length) {
 			setError(`Sorry, ${studentName} is not a verified student!`);
 			return;
 		} 

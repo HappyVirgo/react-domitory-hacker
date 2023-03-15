@@ -20,7 +20,7 @@ function Search({setError, setResidentNameList}) {
 			setError(`Sorry, ${studentName} is not a verified student!`);
 			return;
 		} 
-		if (checkValidity(joiningDate, STUDENTS.filter(st => st.name === studentName)[0].validityDate)) {
+		if (!checkValidity(joiningDate, STUDENTS.filter(st => st.name === studentName)[0].validityDate)) {
 			setError(`Sorry, ${studentName}'s validity has Expired!`);
 			return;
 		}

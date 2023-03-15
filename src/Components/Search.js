@@ -1,5 +1,5 @@
-import React from 'react';
-
+import React, {useState} from 'react';
+import { STUDENTS } from '../studentsList';
 // `joiningDate` && `validityDate` format "yyyy-mm-dd"
 
 function checkValidity(joiningDate, validityDate) {
@@ -12,20 +12,33 @@ function checkValidity(joiningDate, validityDate) {
 	return (maxValid >= selected) && (maxValid >= today);
 }
 
-function Search() {
+function Search({setError, setResidentNameList}) {
+	const [studentName, setStudentName] = useState('')
+	const [joiningDate, setJoiningDate] = useState('')
+	const handleAdd = () => {
+		if (!STUDENTS.filter(st => st.name === studentName).length) {
+			setError(`Sorry, ${studentName} is not a verified student!`);
+			return;
+		} 
+		if (checkValidity(joiningDate, STUDENTS.filter(st => st.name === studentName).validityDate)) {
+			setError(`Sorry, ${studentName}'s validity has Expired!`);
+			return;
+		}
+		setResidentNameList.push(studentName)
+	}
 	return (
 		<div className="my-50 layout-row align-items-end justify-content-end">
 			<label htmlFor="studentName">Student Name:
 				<div>
-					<input id="studentName" data-testid="studentName" type="text" className="mr-30 mt-10"/>
+					<input id="studentName" data-testid="studentName" type="text" className="mr-30 mt-10" value={studentName} onChange={(e) => setStudentName(e.target.value)} />
 				</div>
 			</label>
 			<label htmlFor="joiningDate">Joining Date:
 				<div>
-					<input id="joiningDate" data-testid="joiningDate" type="date" className="mr-30 mt-10"/>
+					<input id="joiningDate" data-testid="joiningDate" type="date" className="mr-30 mt-10" value={joiningDate} onChange={(e) => setJoiningDate(e.target.value)}/>
 				</div>
 			</label>
-			<button type="button" data-testid="addBtn" className="small mb-0">Add</button>
+			<button type="button" data-testid="addBtn" className="small mb-0" onClick={handleAdd}>Add</button>
 		</div>
 	);
 }

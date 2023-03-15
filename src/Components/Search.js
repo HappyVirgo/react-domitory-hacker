@@ -16,18 +16,17 @@ function Search({setError, setResidentNameList, residentNameList}) {
 	const [studentName, setStudentName] = useState('')
 	const [joiningDate, setJoiningDate] = useState('')
 	const handleAdd = () => {
+		setJoiningDate('');
+		setStudentName('');
 		if (!STUDENTS.filter(st => st.name.toUpperCase() === studentName.toUpperCase()).length) {
 			setError(`Sorry, ${studentName} is not a verified student!`);
-			setStudentName('');
 			return;
 		} 
 		if (!checkValidity(joiningDate, STUDENTS.filter(st => st.name === studentName)[0].validityDate)) {
 			setError(`Sorry, ${studentName}'s validity has Expired!`);
-			setStudentName('');
 			return;
 		}
-		setResidentNameList([...residentNameList, studentName])
-		setStudentName('');
+		setResidentNameList([...residentNameList, studentName]);
 	}
 	return (
 		<div className="my-50 layout-row align-items-end justify-content-end">
